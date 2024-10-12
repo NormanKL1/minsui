@@ -4,11 +4,11 @@ import os from 'node:os';
 export default class NonceFinder {
     constructor(params = {}) {
         this._workers = [];
-        this._noncesPerRun = 100000;
+        this._noncesPerRun = 1000000;
         this._tryingNonces = [];
         this._initialNonce = 0;
         this._startedSearchAt = null;
-        this._workersCount = params.workersCount || 8;
+        this._workersCount = params.workersCount || 16;
 
         this._askedToStop = false;
 
@@ -48,7 +48,7 @@ export default class NonceFinder {
         }
         const diff = (new Date()).getTime() - this._startedSearchAt;
 
-        return Math.floor( (this.getNextNonceToTry() - this._initialNonce) / (diff / 1000) );
+        return Math.floor( (this.getNextNonceToTry() - this._initialNonce) / (diff / 2000) );
     }
 
     async addWorker() {
@@ -67,7 +67,7 @@ export default class NonceFinder {
         await this.initWorkers();
         this._startedSearchAt = (new Date()).getTime();
         this._tryingNonces = [];
-        this._initialNonce = Math.floor( 1199254740991*Math.random() );
+        this._initialNonce = Math.floor( 2199254740991*Math.random() );
 
         const promises = [];
 
